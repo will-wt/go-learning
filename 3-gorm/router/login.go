@@ -2,10 +2,6 @@ package router
 
 import "github.com/gin-gonic/gin"
 
-//func Hello(ctx *gin.Context) {
-//	ctx.JSON(200, "Hello world")
-//}
-
 func Login(ctx *gin.Context) {
 	ctx.HTML(200, "login.html", nil)
 }

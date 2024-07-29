@@ -11,7 +11,14 @@ type Result struct {
 	Data    Any    `json:"data"`
 }
 
-func OfSuccess(data Any) Result {
+func Ok() Result {
+	return Result{
+		Code:    200,
+		Message: "success",
+	}
+}
+
+func OkWithData(data Any) Result {
 	return Result{
 		Code:    200,
 		Message: "success",
@@ -19,7 +26,7 @@ func OfSuccess(data Any) Result {
 	}
 }
 
-func OfError(code uint16, message string) Result {
+func Error(code uint16, message string) Result {
 	return Result{
 		Code:    code,
 		Message: message,

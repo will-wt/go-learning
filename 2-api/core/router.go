@@ -17,7 +17,7 @@ func MyRouter(engine *gin.Engine) {
 	})
 
 	// user api
-	engine.GET("/api/listUser", ListUser)       // query 参数
-	engine.GET("/api/getUser/:userId", GetUser) // path 参数
-	engine.POST("/api/updateUser", UpdateUser)  // body 参数
+	engine.GET("/api/user/list", ListUser)      // query 参数
+	engine.GET("/api/user/:userId", GetUser)    // path 参数
+	engine.POST("/api/user/update", UpdateUser) // body 参数
 }

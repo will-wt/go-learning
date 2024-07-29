@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-learning/3-gorm/config"
 	"go-learning/3-gorm/global"
-	"go-learning/3-gorm/init"
+	"go-learning/3-gorm/initialize"
 	"go-learning/3-gorm/router"
 )
 
@@ -26,5 +26,5 @@ func init() {
 	config.LoadConfig()
 	fmt.Println("dsn: ", config.Config.Datasource.Dsn())
 
-	global.DB = init.InitGorm() // 初始化数据库连接池
+	global.DB = initialize.InitGorm() // 初始化数据库连接池
 }

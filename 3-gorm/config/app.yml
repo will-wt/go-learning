@@ -1,7 +1,7 @@
 datasource:
   driver: mysql
   url: 127.0.0.1:3306
-  params: useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
+  params: charset=utf8mb4&parseTime=True&loc=Local
   username: nova1
   password: nova123456
   dbname: nova
