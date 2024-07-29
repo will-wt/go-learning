@@ -1,18 +1,18 @@
-package router
+package core
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-learning/2-login/common/result"
+	"go-learning/2-api/common"
 	"net/http"
 	"strconv"
 )
 
 // User 定义用户结构体
 type User struct {
-	UserId  uint32 `json:"userId"`
-	Name    string `json:"name"`
-	Age     uint8  `json:"age"`
-	Address string `json:"address"`
+	UserId   uint32 `json:"userId"`
+	Nickname string `json:"name"`
+	Age      uint8  `json:"age"`
+	Address  string `json:"address"`
 }
 
 func ListUser(context *gin.Context) {
@@ -28,22 +28,22 @@ func ListUser(context *gin.Context) {
 	}
 
 	if status != 1 {
-		context.JSON(200, result.Result{
+		context.JSON(200, common.Result{
 			Code:    200,
 			Message: "success",
 			Data: []User{
-				{UserId: 1, Name: "ZhangSan", Age: 20},
-				{UserId: 2, Name: "LiSi", Age: 30},
-				{UserId: 3, Name: "WangWu", Age: 25},
+				{UserId: 1, Nickname: "ZhangSan", Age: 20},
+				{UserId: 2, Nickname: "LiSi", Age: 30},
+				{UserId: 3, Nickname: "WangWu", Age: 25},
 			},
 		})
 	} else {
-		context.JSON(200, result.Result{
+		context.JSON(200, common.Result{
 			Code:    200,
 			Message: "success",
 			Data: []User{
-				{UserId: 4, Name: "QianLiu", Age: 30},
-				{UserId: 5, Name: "ZhaoBa", Age: 30},
+				{UserId: 4, Nickname: "QianLiu", Age: 30},
+				{UserId: 5, Nickname: "ZhaoBa", Age: 30},
 			},
 		})
 	}
@@ -63,12 +63,12 @@ func GetUser(ctx *gin.Context) {
 
 	userId := uint32(userId64)
 	user := User{
-		UserId: userId,
-		Name:   "xxx",
-		Age:    30,
+		UserId:   userId,
+		Nickname: "xxx",
+		Age:      30,
 	}
 
-	ctx.JSON(200, result.OfSuccess(user))
+	ctx.JSON(200, common.OfSuccessResult(user))
 }
 
 func UpdateUser(ctx *gin.Context) {
@@ -86,7 +86,7 @@ func UpdateUser(ctx *gin.Context) {
 		return
 	}
 
-	if user.UserId <= 0 || user.Name == "" || user.Age <= 0 {
+	if user.UserId <= 0 || user.Nickname == "" || user.Age <= 0 {
 		ctx.JSON(200, gin.H{
 			"code":    406,
 			"message": "parameter missing",

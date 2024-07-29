@@ -1,7 +1,8 @@
-package router
+package core
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-learning/2-api/common"
 	"net/http"
 )
 
@@ -11,12 +12,9 @@ func MyRouter(engine *gin.Engine) {
 		c.String(http.StatusNotFound, "404 - 请求地址无效!")
 	})
 
-	// 加载模版页面
-	engine.LoadHTMLGlob("2-login/template/*")
-
-	engine.GET("/", Login)
-	engine.GET("/login", Login)
-	engine.POST("/doLogin", DoLogin)
+	engine.GET("/", func(context *gin.Context) {
+		context.JSON(200, common.OfResult(400, "API无效", nil))
+	})
 
 	// user api
 	engine.GET("/api/listUser", ListUser)       // query 参数

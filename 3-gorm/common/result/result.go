@@ -19,6 +19,13 @@ func OfSuccess(data Any) Result {
 	}
 }
 
+func OfError(code uint16, message string) Result {
+	return Result{
+		Code:    code,
+		Message: message,
+	}
+}
+
 func Of(code uint16, message string, data Any) Result {
 	return Result{
 		Code:    code,
