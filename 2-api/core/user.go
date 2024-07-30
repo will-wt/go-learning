@@ -2,7 +2,7 @@ package core
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-learning/2-api/common"
+	"go-learning/2-api/result"
 	"net/http"
 	"strconv"
 )
@@ -20,15 +20,12 @@ func ListUser(context *gin.Context) {
 	status, _ := strconv.Atoi(context.Query("status"))
 
 	if corpId == "" {
-		context.JSON(200, gin.H{
-			"code":    406,
-			"message": "parameter missing",
-		})
+		context.JSON(200, result.Error(406, "parameter missing"))
 		return
 	}
 
 	if status != 1 {
-		context.JSON(200, common.Result{
+		context.JSON(200, result.Result{
 			Code:    200,
 			Message: "success",
 			Data: []User{
@@ -38,7 +35,7 @@ func ListUser(context *gin.Context) {
 			},
 		})
 	} else {
-		context.JSON(200, common.Result{
+		context.JSON(200, result.Result{
 			Code:    200,
 			Message: "success",
 			Data: []User{
@@ -68,7 +65,7 @@ func GetUser(ctx *gin.Context) {
 		Age:      30,
 	}
 
-	ctx.JSON(200, common.OfSuccessResult(user))
+	ctx.JSON(200, result.OkWithData(user))
 }
 
 func UpdateUser(ctx *gin.Context) {

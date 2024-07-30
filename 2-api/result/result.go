@@ -4,7 +4,7 @@ package result
 type Any interface {
 }
 
-// Result API统一返回结果，使用 omitempty 标签来排除 null 值的字段
+// Result API统一返回结果，使用 omitempty 标签来排除 nil 值的字段
 type Result struct {
 	Code    uint16 `json:"code"`
 	Message string `json:"message,omitempty"`
@@ -33,7 +33,7 @@ func Error(code uint16, message string) Result {
 	}
 }
 
-func Of(code uint16, message string, data Any) Result {
+func OfResult(code uint16, message string, data Any) Result {
 	return Result{
 		Code:    code,
 		Message: message,

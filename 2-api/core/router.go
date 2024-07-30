@@ -2,7 +2,7 @@ package core
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-learning/2-api/common"
+	"go-learning/2-api/result"
 	"net/http"
 )
 
@@ -13,7 +13,7 @@ func MyRouter(engine *gin.Engine) {
 	})
 
 	engine.GET("/", func(context *gin.Context) {
-		context.JSON(200, common.OfResult(400, "API无效", nil))
+		context.JSON(200, result.OfResult(400, "API无效", nil))
 	})
 
 	// user api
