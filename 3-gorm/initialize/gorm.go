@@ -2,14 +2,14 @@ package initialize
 
 import (
 	"fmt"
-	"go-learning/3-gorm/config"
+	"go-learning/3-gorm/global"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"time"
 )
 
 func InitGorm() *gorm.DB {
-	ds := config.Config.Datasource
+	ds := global.AppConfig.Datasource
 
 	mysqlConfig := mysql.Config{
 		DSN: ds.Dsn(),

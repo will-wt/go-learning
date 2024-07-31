@@ -1,7 +1,8 @@
-package dal
+package dao
 
 import (
 	"go-learning/3-gorm/global"
+	"gorm.io/gorm"
 	"time"
 )
 
@@ -15,20 +16,25 @@ type UserDO struct {
 	TenantId    string    `json:"tenantId"`
 }
 
+type UserDAO struct {
+}
+
 // TableName 自定义表名
 func (UserDO) TableName() string {
 	return "sys_user"
 }
 
-var item UserDO
-var items []UserDO
+func (userDAO *UserDAO) Get(userId string) (*UserDO, error) {
+	var item *UserDO
+	err := global.DB.Where("user_id = ?", userId).First(&item).Error
 
-func Get(userId string) UserDO {
-	global.DB.Where("user_id = ?", userId).Find(&item)
-	return item
+	if err == gorm.ErrRecordNotFound {
+		return nil, nil
+	}
+	return item, err
 }
 
-func Add(userDO UserDO) struct {
+func (userDAO *UserDAO) Add(userDO UserDO) struct {
 	id  int
 	Row int64
 	Err error
@@ -45,7 +51,7 @@ func Add(userDO UserDO) struct {
 	}{id: userDO.Id, Row: tx.RowsAffected, Err: tx.Error}
 }
 
-func Update(userDO UserDO) struct {
+func (userDAO *UserDAO) Update(userDO UserDO) struct {
 	Row int64
 	Err error
 } {
@@ -56,7 +62,7 @@ func Update(userDO UserDO) struct {
 	}{Row: tx.RowsAffected, Err: tx.Error}
 }
 
-func Delete(userId string) struct {
+func (userDAO *UserDAO) Delete(userId string) struct {
 	Row int64
 	Err error
 } {

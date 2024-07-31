@@ -1,6 +1,7 @@
 datasource:
   driver: mysql
-  url: 127.0.0.1:3306
+  host: 127.0.0.1
+  port: 3306
   params: charset=utf8mb4&parseTime=True&loc=Local
   username: nova1
   password: nova123456

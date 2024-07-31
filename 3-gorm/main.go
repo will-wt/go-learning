@@ -23,8 +23,9 @@ func main() {
 // 初始化自启动函数
 func init() {
 	// 加载、解析配置项
-	config.LoadConfig()
-	fmt.Println("dsn: ", config.Config.Datasource.Dsn())
+	global.AppConfig = config.LoadConfig()
+	fmt.Println("dsn: ", global.AppConfig.Datasource)
 
-	global.DB = initialize.InitGorm() // 初始化数据库连接池
+	// 初始化数据库连接池
+	global.DB = initialize.InitGorm()
 }

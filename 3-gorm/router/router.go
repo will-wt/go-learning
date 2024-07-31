@@ -2,6 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-learning/3-gorm/api"
+	"go-learning/3-gorm/web"
 	"net/http"
 )
 
@@ -11,15 +13,24 @@ func MyRouter(engine *gin.Engine) {
 		c.String(http.StatusNotFound, "404 - 请求地址无效!")
 	})
 
+	apiRouter(engine)
+
+	webRouter(engine)
+}
+
+func apiRouter(engine *gin.Engine) {
+	// user module
+	engine.POST("/api/user/add", api.AddUser)
+	engine.GET("/api/user/get", api.GetUser)
+	engine.POST("/api/user/update", api.UpdateUser)
+}
+
+func webRouter(engine *gin.Engine) {
 	// 加载模版页面
 	engine.LoadHTMLGlob("3-gorm/template/*")
 
-	engine.GET("/", Login)
-	engine.GET("/login", Login)
-	engine.POST("/doLogin", DoLogin)
-
-	// user api
-	engine.POST("/api/user/add", AddUser)
-	engine.GET("/api/user/get", GetUser)
-	engine.POST("/api/user/update", UpdateUser)
+	// login module
+	engine.GET("/", web.Login)
+	engine.GET("/page/login", web.Login)
+	engine.POST("/page/doLogin", web.DoLogin)
 }
