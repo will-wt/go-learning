@@ -1,8 +1,7 @@
 package result
 
 // Any 泛型接口
-type Any interface {
-}
+type Any interface{}
 
 // Result API统一返回结果，使用 omitempty 标签来排除 null 值的字段
 type Result struct {

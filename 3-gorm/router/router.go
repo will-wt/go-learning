@@ -22,7 +22,8 @@ func apiRouter(engine *gin.Engine) {
 	// user module
 	engine.POST("/api/user/add", api.AddUser)
 	engine.GET("/api/user/get", api.GetUser)
-	engine.POST("/api/user/update", api.UpdateUser)
+	engine.POST("/api/user/update_info", api.UpdateUserInfo)
+	engine.POST("/api/user/update_status", api.UpdateUserStatus)
 }
 
 func webRouter(engine *gin.Engine) {
